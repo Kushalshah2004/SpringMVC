@@ -2,8 +2,8 @@ package com.lcwd.springmvc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.support.BindingAwareModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class MainController {
         model.addAttribute("abcd",abcd);
         return "home";
     }
-    @RequestMapping("/about")
+    @RequestMapping(path="/about", method = RequestMethod.GET)
     public String about(){
         System.out.println("This is about url");
         return "about";
