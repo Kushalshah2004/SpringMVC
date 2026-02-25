@@ -1,6 +1,8 @@
 package com.lcwd.springmvc.controller;
 
 import com.lcwd.springmvc.model.User;
+import com.lcwd.springmvc.services.UserServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ContactController {
+
+    @Autowired
+    private UserServices userServices;
 
     @ModelAttribute
     public void commonData(Model model,HttpServletRequest httpServletRequest){
@@ -36,7 +41,8 @@ public class ContactController {
     }*/
 
     /* RequestField annotation*/
-    /*@RequestMapping(path = "/processform",method = RequestMethod.POST)
+    /*
+    @RequestMapping(path = "/processform",method = RequestMethod.POST)
     public String handleForm(
             @RequestParam("useremail") String userEmail,
             @RequestParam("username") String userName,
@@ -53,7 +59,11 @@ public class ContactController {
     /*Model attribute*/
     @RequestMapping(path = "/processform",method = RequestMethod.POST)
     public String handleForm(@ModelAttribute User user, Model model){
-        System.out.println(user);
+        System.out.println("Contact Controller is working");
+        if ("".equals(user.getUsername())){
+            return "empty";
+        }
+        userServices.createUser(user);
         model.addAttribute("name",user.getUsername());
         model.addAttribute("email",user.getUseremail());
         model.addAttribute("password",user.getUserpassword());

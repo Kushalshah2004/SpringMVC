@@ -1,11 +1,19 @@
 package com.lcwd.springmvc.model;
 
+import javax.persistence.*;
+
 /*
     name of variable and client side input tag name must be same otherwise mapping will not occur and give error.
     number of variable must be same as no of input tag at client side
 */
+@Entity
 public class User {
-    private String username,useremail,userpassword;
+    @Id()
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int userid;
+    private String username;
+    private String useremail;
+    private String userpassword;
 
     public String getUsername() {
         return username;
